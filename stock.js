@@ -21,8 +21,7 @@ export default class Stock {
       close: this.close,
       bid: this.bid,
       ask: this.ask,
-      tradeDate: this.tradeDate
+      tradeDate: this.tradeDate,
     };
   }
 }
-

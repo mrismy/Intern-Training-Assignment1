@@ -1,33 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assignment 1</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h2>Stock Dashboard</h2>
-  <label for="exchangeSelect">Select Exchange: </label>
-  <select id="exchangeSelect">
-    <option value="ALL">ALL</option>
-    <option value="TDWL">TDWL</option>
-    <option value="DFM">DFM</option>
-  </select>
-    <br></br>
-  <table>
-        <tr>
-            <th>Symbol</th>
-            <th>Open</th>
-            <th>High</th>
-            <th>Low</th>
-            <th>Close</th>
-            <th>Bid</th>
-            <th>Ask</th>
-            <th>Trade-date</th>
-        </tr>
-    <tbody id="stockBody"></tbody>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 1</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="mock_data.js"></script>
+  </head>
+
+  <body>
+    <h2>Stock Dashboard</h2>
+    <label for="exchangeSelect">Select Exchange: </label>
+    <select id="exchangeSelect">
+      <option value="ALL">ALL</option>
+      <option value="TDWL">TDWL</option>
+      <option value="DFM">DFM</option>
+    </select>
+
+    <table>
+      <tr>
+        <th>Symbol</th>
+        <th>Open</th>
+        <th>High</th>
+        <th>Low</th>
+        <th>Close</th>
+        <th>Bid</th>
+        <th>Ask</th>
+        <th>Trade-date</th>
+      </tr>
+      <tbody id="stockBody"></tbody>
     </table>
-  <script type="module" src="mock_data.js"></script>
-</body>
+  </body>
 </html>
