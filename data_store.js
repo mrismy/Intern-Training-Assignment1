@@ -8,9 +8,14 @@ export default class DataStore {
     if (!stock) {
       return;
     }
+
     this.stocks.push(stock);
     const key = stock.exchange;
-    if (!this.exchangeMap.has(key)) this.exchangeMap.set(key, []);
+    
+    if (!this.exchangeMap.has(key)){
+      this.exchangeMap.set(key, []);
+    }
+
     this.exchangeMap.get(key).push(stock);
   }
 

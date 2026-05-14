@@ -9,15 +9,17 @@ const SampleSymbols = {
 };
 
 function randPrice(min = 1, max = 500) {
-  return +(Math.random() * (max - min) + min).toFixed(2);
+  return +(Math.random() * (max - min)).toFixed(2);
 }
 
 function randDateWithinYear() {
-  const Days = Math.floor(Math.random() * 365);
-  return new Date(Date.now() - Days * 24 * 60 * 60 * 1000).toISOString();
+  const Start = new Date("2026-01-01T00:00:00.000Z").getTime();
+  const End = new Date("2026-04-31T23:59:59.999Z").getTime();
+  const RandomTime = Start + Math.random() * (End - Start);
+  return new Date(RandomTime).toISOString().slice(0, 10);
 }
 
-function makeStock(symbol, exchange) {
+function makeStock(exchange, symbol) {
   const Open = randPrice();
   const High = +(Open + Math.random() * 5).toFixed(2);
   const Low = +(Open - Math.random() * 5).toFixed(2);
@@ -25,6 +27,7 @@ function makeStock(symbol, exchange) {
   const Bid = +(Close - Math.random() * 0.5).toFixed(2);
   const Ask = +(Close + Math.random() * 0.5).toFixed(2);
   const TradeDate = randDateWithinYear();
+  
   return new Stock(
     symbol,
     exchange,
@@ -40,16 +43,18 @@ function makeStock(symbol, exchange) {
 
 Object.entries(SampleSymbols)
   .map(([exchange, symbols]) =>
-    symbols.map((symbol) => makeStock(symbol, exchange)),
+    symbols.map((symbol) => makeStock(exchange, symbol)),
   )
   .flat()
   .forEach((stock) => Store.addStock(stock));
 
 function renderTable(exchange) {
   const Tbody = document.getElementById("stockBody");
+
   if (!Tbody) {
     return;
   }
+
   Tbody.innerHTML = "";
   const StocksToRender =
     exchange === "ALL"
@@ -66,7 +71,7 @@ function renderTable(exchange) {
       <td>${Stock.close}</td>
       <td>${Stock.bid}</td>
       <td>${Stock.ask}</td>
-      <td>${Stock.tradeDate}</td>
+      <td>${Stock.tradeDate.slice(0, 10)}</td>
     `;
     Tbody.appendChild(Tr);
   }
@@ -88,6 +93,7 @@ function updateStockPrices() {
 }
 
 const select = document.getElementById("exchangeSelect");
+
 if (select) {
   select.addEventListener("change", (e) => renderTable(e.target.value));
   renderTable(select.value);
